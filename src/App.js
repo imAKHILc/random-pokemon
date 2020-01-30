@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      random: 2,
+    }
+  }
+  render(){
+    return (
+      <div>
+        <img alt='poke' className='pokemon' src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+this.state.random+'.png'}/>
+        {this.randomize()}
+      </div>
+    );
+  }
 
-export default App;
+  randomize = () => {
+    setTimeout(function() {
+      const min = 1;
+      const max = 807;
+      const rand = min + Math.random() * (max - min);
+      this.setState({ random: Math.trunc(rand) });
+    }.bind(this), 1000)
+  }
+}
